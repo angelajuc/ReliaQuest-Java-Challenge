@@ -1,11 +1,14 @@
 package com.challenge.api.controller;
 
 import com.challenge.api.model.Employee;
+import com.challenge.api.model.MockEmployee;
+import com.challenge.api.service.EmployeeService;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
@@ -15,12 +18,16 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/api/v1/employee")
 public class EmployeeController {
 
+    @Autowired
+    private EmployeeService employeeService;
+
     /**
      * @implNote Need not be concerned with an actual persistence layer. Generate mock Employee models as necessary.
      * @return One or more Employees.
      */
+    @GetMapping
     public List<Employee> getAllEmployees() {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        return employeeService.findAll();
     }
 
     /**
@@ -28,8 +35,13 @@ public class EmployeeController {
      * @param uuid Employee UUID
      * @return Requested Employee if exists
      */
-    public Employee getEmployeeByUuid(UUID uuid) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+    @GetMapping("/{uuid}")
+    public ResponseEntity<Employee> getEmployeeByUuid(@PathVariable UUID uuid) {
+        Employee employee = employeeService.findByUuid(uuid);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     /**
@@ -37,7 +49,14 @@ public class EmployeeController {
      * @param requestBody hint!
      * @return Newly created Employee
      */
-    public Employee createEmployee(Object requestBody) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+    @PostMapping
+    public Employee createEmployee(@RequestBody Object requestBody) {
+
+        if (! (requestBody instanceof Employee)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid employee format.");
+        }
+
+        Employee employee = (MockEmployee) requestBody;
+        return employeeService.addEmployee(employee);
     }
 }
