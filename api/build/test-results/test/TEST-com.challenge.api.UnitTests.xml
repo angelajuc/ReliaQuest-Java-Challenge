@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.challenge.api.UnitTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-02T03:51:22" hostname="Angelas-MacBook-Air-4.local" time="0.34">
+  <properties/>
+  <testcase name="testCreateEmployee_DuplicateEmail_StillCreates()" classname="com.challenge.api.UnitTests" time="0.34"/>
+  <system-out><![CDATA[22:51:22.367 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.challenge.api.UnitTests]: UnitTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:51:22.398 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.challenge.api.EntryLevelJavaChallengeApplication for test class com.challenge.api.UnitTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v3.2.10)
+
+2026-01-01T22:51:22.515-05:00  INFO 88570 --- [entry-level-java-challenge] [    Test worker] com.challenge.api.UnitTests              : Starting UnitTests using Java 17.0.17 with PID 88570 (started by angelachang in /Users/angelachang/Desktop/reliaquest/ReliaQuest-Java-Challenge/api)
+2026-01-01T22:51:22.515-05:00  INFO 88570 --- [entry-level-java-challenge] [    Test worker] com.challenge.api.UnitTests              : No active profile set, falling back to 1 default profile: "default"
+2026-01-01T22:51:22.845-05:00  INFO 88570 --- [entry-level-java-challenge] [    Test worker] com.challenge.api.UnitTests              : Started UnitTests in 0.407 seconds (process running for 0.737)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
