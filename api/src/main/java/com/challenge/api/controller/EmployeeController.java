@@ -37,6 +37,10 @@ public class EmployeeController {
      */
     @GetMapping("/{uuid}")
     public ResponseEntity<Employee> getEmployeeByUuid(@PathVariable UUID uuid) {
+
+        if (uuid == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UUID cant be null");
+        }
         Employee employee = employeeService.findByUuid(uuid);
         if (employee != null) {
             return ResponseEntity.ok(employee);
@@ -51,12 +55,19 @@ public class EmployeeController {
      */
     @PostMapping
     public Employee createEmployee(@RequestBody Object requestBody) {
-
-        if (! (requestBody instanceof Employee)) {
+        if (requestBody == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body cant be null");
+        }
+        if (!(requestBody instanceof Employee)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid employee format.");
         }
 
         Employee employee = (MockEmployee) requestBody;
-        return employeeService.addEmployee(employee);
+
+        try {
+            return employeeService.addEmployee(employee);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 }
